@@ -89,7 +89,8 @@ if (!class_exists("wp_convio")) {
 		                'WA'=>"Washington",  
 		                'WV'=>"West Virginia",  
 		                'WI'=>"Wisconsin",  
-		                'WY'=>"Wyoming");
+		                'WY'=>"Wyoming",
+		                'OZ' => 'Oz');
                 		
 		function __construct() {
 		
