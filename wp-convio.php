@@ -10,7 +10,7 @@
 	License: GPL2
 */
 
-/*  
+/*	
 	Copyright 2012 United To End Genocide (email : info@endgenocide.org)
 
     This program is free software; you can redistribute it and/or modify
@@ -31,9 +31,8 @@ require_once('ConvioOpenAPI.php');
 
 if (!class_exists("wp_convio")) {
 	
-	class wp_convio extends WP_Widget {
+	class wp_convio {
 	
-		
 		public $convio_api;
 		public $convio_data;
 		
@@ -274,10 +273,6 @@ if (isset($wp_convio)) {
 	//Actions
 	add_action('admin_menu', 'wp_convio_ap');
 	add_action('init',  array(&$wp_convio, 'create_convio_post_types'));
-	// add_action('plugins_loaded', array(&$wp_convio, 'register_widget'));
-	
-	//Filters
-	// add_filter('the_content', array(&$wp_convio, 'get_alert_by_zip'));
 
 }
 
