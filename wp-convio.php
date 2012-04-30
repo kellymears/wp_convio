@@ -195,25 +195,33 @@ if (!class_exists("wp_convio")) {
 					
 					<h2><?php _e('WordPress - Convio Options', 'wp_convio'); ?></h2>
 					
-					<p><strong>This plugin is a work in progress.<br /></strong>Much love,<br /> K.</p>
+					<p><strong>This plugin is a work in progress.<br />
+					</strong>Much love,<br /> 
+					K.</p>
 					
 					<h3><?php _e('Convio Host', 'wp_convio'); ?></h3>
-					<input type="text" name="wp_convio_host" value="<?php echo $this->admin_options['host']; ?>">
+					<input type="text" name="wp_convio_host" 
+						value="<?php echo $this->admin_options['host']; ?>">
 					
 					<h3><?php _e('Convio Short Name', 'wp_convio'); ?></h3>
-					<input type="text" name="wp_convio_short_name" value="<?php echo $this->admin_options['short_name']; ?>">
+					<input type="text" name="wp_convio_short_name" 
+						value="<?php echo $this->admin_options['short_name']; ?>">
 					
 					<h3><?php _e('Convio API Key', 'wp_convio'); ?></h3>
-					<input type="text" name="wp_convio_api_key" value="<?php echo $this->admin_options['api_key']; ?>">
+					<input type="text" name="wp_convio_api_key" 
+						value="<?php echo $this->admin_options['api_key']; ?>">
 					
 					<h3><?php _e('Convio Login Name', 'wp_convio'); ?></h3>
-					<input type="text" name="wp_convio_login_name" value="<?php echo $this->admin_options['login_name']; ?>">
+					<input type="text" name="wp_convio_login_name" 
+						value="<?php echo $this->admin_options['login_name']; ?>">
 					
 					<h3><?php _e('Convio Login Password', 'wp_convio'); ?></h3>
-					<input type="text" name="wp_convio_login_password" value="<?php echo $this->admin_options['login_password']; ?>">
+					<input type="text" name="wp_convio_login_password" 
+						value="<?php echo $this->admin_options['login_password']; ?>">
 
 					<div class="submit">
-						<input type="submit" name="update_wp_convio_options" value="<?php _e('Update Settings', 'wp_convio') ?>" />
+						<input type="submit" name="update_wp_convio_options" 
+							value="<?php _e('Update Settings', 'wp_convio') ?>" />
 					</div>
 					
 				</form>
@@ -293,13 +301,32 @@ if (!class_exists("wp_convio")) {
 			 
 			 } else { 
 	
-				$shortcode = '<div class="wp_convio_post wp_convio_form"><form method="post" action="'. $_SERVER['REQUEST_URI'] .'"><h3>'. __('First Name', 'wp_convio') .'</h3><input type="text" name="wp_convio_first_name" value="'. $this->convio_data['first_name'] .'"><h3>'. __('Last Name', 'wp_convio') .'</h3><input type="text" name="wp_convio_last_name" value="'. $this->convio_data['last_name'] .'"><h3>'. __('Street', 'wp_convio') .'</h3><input type="text" name="wp_convio_street1" value="'. $this->convio_data['street1'] .'"><h3>'. __('City', 'wp_convio') .'</h3><input type="text" name="wp_convio_city" value="'. $this->convio_data['city'] .'"><h3>'. __('State', 'wp_convio') .'</h3><select name="wp_convio_state">'; 
+				$shortcode = '<div class="wp_convio_post wp_convio_form"><form method="post" action="'. $_SERVER['REQUEST_URI'] .'">
+							<h3>'. __('First Name', 'wp_convio') .'</h3><input type="text" name="wp_convio_first_name" 
+								value="'. $this->convio_data['first_name'] .'">
+							<h3>'. __('Last Name', 'wp_convio') .'</h3><input type="text" name="wp_convio_last_name" 
+								value="'. $this->convio_data['last_name'] .'">
+							<h3>'. __('Street', 'wp_convio') .'</h3><input type="text" name="wp_convio_street1" 
+								value="'. $this->convio_data['street1'] .'">
+							<h3>'. __('City', 'wp_convio') .'</h3><input type="text" name="wp_convio_city" 
+								value="'. $this->convio_data['city'] .'">
+							<h3>'. __('State', 'wp_convio') .'</h3><select name="wp_convio_state">'; 
 				
 				foreach($this->states as $abbr => $state) { 
 					$shortcode .= '<option value="'. $abbr .'">'. $state .'</option>';
 				} 
 				
-				$shortcode .= '</select><h3>'. __('Zip', 'wp_convio') .'</h3><input type="text" name="wp_convio_zip" value="'. $this->convio_data['zip'] .'"><h3>'. __('Phone', 'wp_convio') .'</h3><input type="text" name="wp_convio_phone" value="'. $this->convio_data['phone'] .'"><h3>'. __('Email', 'wp_convio') .'</h3><input type="text" name="wp_convio_email" value="'. $this->convio_data['email'] .'"><div class="submit"><input type="submit" name="wp_convio_submit" value="'. __('Submit', 'wp_convio') .'" /></div></form></div>';	
+				$shortcode .= '</select>
+							<h3>'. __('Zip', 'wp_convio') .'</h3><input type="text" name="wp_convio_zip" 
+								value="'. $this->convio_data['zip'] .'">
+							<h3>'. __('Phone', 'wp_convio') .'</h3><input type="text" name="wp_convio_phone" 
+								value="'. $this->convio_data['phone'] .'">
+							<h3>'. __('Email', 'wp_convio') .'</h3><input type="text" name="wp_convio_email" 
+								value="'. $this->convio_data['email'] .'">
+							<div class="submit">
+								<input type="submit" name="wp_convio_submit" value="'. __('Submit', 'wp_convio') .'" />
+							</div>
+							</form></div>';	
 				
 				return $shortcode; 
 			}
