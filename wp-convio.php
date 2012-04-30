@@ -39,6 +39,58 @@ if (!class_exists("wp_convio")) {
 		var $admin_options_name = "wp_convio_admin_options";
 		var $admin_options;
 		
+		public $states = array('AL'=>"Alabama",
+		                'AK'=>"Alaska",  
+		                'AZ'=>"Arizona",  
+		                'AR'=>"Arkansas",  
+		                'CA'=>"California",  
+		                'CO'=>"Colorado",  
+		                'CT'=>"Connecticut",  
+		                'DE'=>"Delaware",  
+		                'DC'=>"District Of Columbia",  
+		                'FL'=>"Florida",  
+		                'GA'=>"Georgia",  
+		                'HI'=>"Hawaii",  
+		                'ID'=>"Idaho",  
+		                'IL'=>"Illinois",  
+		                'IN'=>"Indiana",  
+		                'IA'=>"Iowa",  
+		                'KS'=>"Kansas",  
+		                'KY'=>"Kentucky",  
+		                'LA'=>"Louisiana",  
+		                'ME'=>"Maine",  
+		                'MD'=>"Maryland",  
+		                'MA'=>"Massachusetts",  
+		                'MI'=>"Michigan",  
+		                'MN'=>"Minnesota",  
+		                'MS'=>"Mississippi",  
+		                'MO'=>"Missouri",  
+		                'MT'=>"Montana",
+		                'NE'=>"Nebraska",
+		                'NV'=>"Nevada",
+		                'NH'=>"New Hampshire",
+		                'NJ'=>"New Jersey",
+		                'NM'=>"New Mexico",
+		                'NY'=>"New York",
+		                'NC'=>"North Carolina",
+		                'ND'=>"North Dakota",
+		                'OH'=>"Ohio",  
+		                'OK'=>"Oklahoma",  
+		                'OR'=>"Oregon",  
+		                'PA'=>"Pennsylvania",  
+		                'RI'=>"Rhode Island",  
+		                'SC'=>"South Carolina",  
+		                'SD'=>"South Dakota",
+		                'TN'=>"Tennessee",  
+		                'TX'=>"Texas",  
+		                'UT'=>"Utah",  
+		                'VT'=>"Vermont",  
+		                'VA'=>"Virginia",  
+		                'WA'=>"Washington",  
+		                'WV'=>"West Virginia",  
+		                'WI'=>"Wisconsin",  
+		                'WY'=>"Wyoming");
+                		
 		function __construct() {
 		
 			$this->admin_options = $this->get_admin_options();
@@ -241,7 +293,13 @@ if (!class_exists("wp_convio")) {
 			 
 			 } else { 
 	
-				$shortcode = '<div class="wp_convio_post wp_convio_form"><form method="post" action="'. $_SERVER['REQUEST_URI'] .'"><h3>'. __('First Name', 'wp_convio') .'</h3><input type="text" name="wp_convio_first_name" value="'. $this->convio_data['first_name'] .'"><h3>'. __('Last Name', 'wp_convio') .'</h3><input type="text" name="wp_convio_last_name" value="'. $this->convio_data['last_name'] .'"><h3>'. __('Street', 'wp_convio') .'</h3><input type="text" name="wp_convio_street1" value="'. $this->convio_data['street1'] .'"><h3>'. __('City', 'wp_convio') .'</h3><input type="text" name="wp_convio_city" value="'. $this->convio_data['city'] .'"><h3>'. __('State', 'wp_convio') .'</h3><input type="text" name="wp_convio_state" value="'. $this->convio_data['state'] .'"><h3>'. __('Zip', 'wp_convio') .'</h3><input type="text" name="wp_convio_zip" value="'. $this->convio_data['zip'] .'"><h3>'. __('Phone', 'wp_convio') .'</h3><input type="text" name="wp_convio_phone" value="'. $this->convio_data['phone'] .'"><h3>'. __('Email', 'wp_convio') .'</h3><input type="text" name="wp_convio_email" value="'. $this->convio_data['email'] .'"><div class="submit"><input type="submit" name="wp_convio_submit" value="'. __('Submit', 'wp_convio') .'" /></div></form></div>';	
+				$shortcode = '<div class="wp_convio_post wp_convio_form"><form method="post" action="'. $_SERVER['REQUEST_URI'] .'"><h3>'. __('First Name', 'wp_convio') .'</h3><input type="text" name="wp_convio_first_name" value="'. $this->convio_data['first_name'] .'"><h3>'. __('Last Name', 'wp_convio') .'</h3><input type="text" name="wp_convio_last_name" value="'. $this->convio_data['last_name'] .'"><h3>'. __('Street', 'wp_convio') .'</h3><input type="text" name="wp_convio_street1" value="'. $this->convio_data['street1'] .'"><h3>'. __('City', 'wp_convio') .'</h3><input type="text" name="wp_convio_city" value="'. $this->convio_data['city'] .'"><h3>'. __('State', 'wp_convio') .'</h3><select name="wp_convio_state">'; 
+				
+				foreach($this->states as $abbr => $state) { 
+					$shortcode .= '<option value="'. $abbr .'">'. $state .'</option>';
+				} 
+				
+				$shortcode .= '</select><h3>'. __('Zip', 'wp_convio') .'</h3><input type="text" name="wp_convio_zip" value="'. $this->convio_data['zip'] .'"><h3>'. __('Phone', 'wp_convio') .'</h3><input type="text" name="wp_convio_phone" value="'. $this->convio_data['phone'] .'"><h3>'. __('Email', 'wp_convio') .'</h3><input type="text" name="wp_convio_email" value="'. $this->convio_data['email'] .'"><div class="submit"><input type="submit" name="wp_convio_submit" value="'. __('Submit', 'wp_convio') .'" /></div></form></div>';	
 				
 				return $shortcode; 
 			}
