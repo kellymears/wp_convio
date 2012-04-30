@@ -216,16 +216,24 @@ if (!class_exists("wp_convio")) {
 				// Make API call
 				$response = $this->convio_api->call('SRAdvocacyAPI_takeAction', $this->convio_data);
 				
+				// Poke and Prod our Response From Convio
 				if(isset($response)) {
-					if($response->code = 5806) { ?>
-						<div class="error">
-							<p><strong><?php _e("You've already taken action on this issue. Thanks!", "wp_convio"); ?></strong></p>
-						</div>
-					<?php } if($response->code != 5806) { ?>
-						<div class="updated">
-							<p><strong><?php _e("Thank You For Gently Prodding Your Representative With A Digital Stick.", "wp_convio"); ?></strong></p>
-						</div>
-					<?php }
+					
+					if($response->code = 5806) {
+						
+						$message = '<div class="error"><p><strong>';
+						$message .= _e("You've already taken action on this issue. Thanks!", "wp_convio");
+						$message .= '</strong></p></div>';
+						
+					} elseif($response->code != 5806) {
+					
+						$message = '<div class="updated"><p><strong>';
+						$message .= _e("Thank You For Gently Prodding Your Representative With A Digital Stick.", "wp_convio");
+						$message .= '</strong></p></div>';
+						
+					}
+					
+					return $message;
 				}
 			 
 			 } else { 
