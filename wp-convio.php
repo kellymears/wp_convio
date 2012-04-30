@@ -216,17 +216,21 @@ if (!class_exists("wp_convio")) {
 				// Make API call
 				$response = $this->convio_api->call('SRAdvocacyAPI_takeAction', $this->convio_data);
 				
-				if($response) { ?>
-					<div class="updated">
-						<p><strong><?php _e("Thank You For Gently Prodding Your Representative With A Digital Stick.", "wp_convio"); ?></strong></p>
-					</div>
-				<?php } else { ?>
-					<div class="updated"><p><strong>There was a problem with your request.</strong></p></div>
-				<?php }
+				if(isset($response)) {
+					if($response->code = 5806) { ?>
+						<div class="error">
+							<p><strong><?php _e("You've already taken action on this issue. Thanks!", "wp_convio"); ?></strong></p>
+						</div>
+					<?php } if($response->code != 5806) { ?>
+						<div class="updated">
+							<p><strong><?php _e("Thank You For Gently Prodding Your Representative With A Digital Stick.", "wp_convio"); ?></strong></p>
+						</div>
+					<?php }
+				}
 			 
 			 } else { 
 	
-				$shortcode = '<div class="wp_convio_post"><form method="post" action="'. $_SERVER['REQUEST_URI'] .'"><h3>First Name</h3><input type="text" name="wp_convio_first_name" value="'. $this->convio_data['first_name'] .'"><h3>Last Name</h3<input type="text" name="wp_convio_last_name" value="'. $this->convio_data['last_name'] .'"><h3>Street</h3><input type="text" name="wp_convio_street1" value="'. $this->convio_data['street1'] .'"><h3>City</h3><input type="text" name="wp_convio_city" value="'. $this->convio_data['city'] .'"><h3>State</h3><input type="text" name="wp_convio_state" value="'. $this->convio_data['state'] .'"><h3>Zip</h3><input type="text" name="wp_convio_zip" value="'. $this->convio_data['zip'] .'"><h3>Phone</h3><input type="text" name="wp_convio_phone" value="'. $this->convio_data['phone'] .'"><h3>Email</h3><input type="text" name="wp_convio_email" value="'. $this->convio_data['email'] .'"><div class="submit"><input type="submit" name="wp_convio_submit" value="Submit" /></div></form></div>';	
+				$shortcode = '<div class="wp_convio_post"><form method="post" action="'. $_SERVER['REQUEST_URI'] .'"><h3>First Name</h3><input type="text" name="wp_convio_first_name" value="'. $this->convio_data['first_name'] .'"><h3>Last Name</h3><input type="text" name="wp_convio_last_name" value="'. $this->convio_data['last_name'] .'"><h3>Street</h3><input type="text" name="wp_convio_street1" value="'. $this->convio_data['street1'] .'"><h3>City</h3><input type="text" name="wp_convio_city" value="'. $this->convio_data['city'] .'"><h3>State</h3><input type="text" name="wp_convio_state" value="'. $this->convio_data['state'] .'"><h3>Zip</h3><input type="text" name="wp_convio_zip" value="'. $this->convio_data['zip'] .'"><h3>Phone</h3><input type="text" name="wp_convio_phone" value="'. $this->convio_data['phone'] .'"><h3>Email</h3><input type="text" name="wp_convio_email" value="'. $this->convio_data['email'] .'"><div class="submit"><input type="submit" name="wp_convio_submit" value="Submit" /></div></form></div>';	
 				
 				return $shortcode; 
 			}
