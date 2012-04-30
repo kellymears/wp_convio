@@ -172,8 +172,7 @@ if (!class_exists("wp_convio")) {
 		
 		// End function print_admin_page()
 				
-		function get_alert_by_zip($attr) {
-						
+		function convioaction_shortcode($attr) {
 			
 			if (isset($_POST['wp_convio_submit'])) { 
 			
@@ -216,15 +215,17 @@ if (!class_exists("wp_convio")) {
 				// Make API call
 				$response = $this->convio_api->call('SRAdvocacyAPI_takeAction', $this->convio_data);
 				
-				// Poke and Prod our Response From Convio
+				// Poke and Prod Convio Response
 				if(isset($response)) {
 					
+					// If respondant has already taken action on this issue:
 					if($response->code = 5806) {
 						
 						$message = '<div class="error"><p><strong>';
 						$message .= _e("You've already taken action on this issue. Thanks!", "wp_convio");
 						$message .= '</strong></p></div>';
-						
+					
+					// If respondant has not already taken action on this issue:	
 					} elseif($response->code != 5806) {
 					
 						$message = '<div class="updated"><p><strong>';
@@ -233,6 +234,7 @@ if (!class_exists("wp_convio")) {
 						
 					}
 					
+					// Return our message
 					return $message;
 				}
 			 
@@ -267,7 +269,7 @@ if (!function_exists("wp_convio_ap")) {
 if (isset($wp_convio)) {
 
 	// Shortcode
-	add_shortcode('convioaction', array(&$wp_convio, 'get_alert_by_zip'));
+	add_shortcode('convioaction', array(&$wp_convio, 'convioaction_shortcode'));
 
 	//Actions
 	add_action('admin_menu', 'wp_convio_ap');
