@@ -107,7 +107,7 @@ if (!class_exists("wp_convio")) {
 		}
 				
 		// Prints out the admin page
-		function print_admin_page() {
+		function admin_page() {
 											
 			if (isset($_POST['update_wp_convio_options'])) { 
 			
@@ -209,9 +209,7 @@ if (!class_exists("wp_convio")) {
 				if(isset($_POST['wp_convio_email'])) { 
 					$this->convio_data['email'] = $_POST['wp_convio_email'];
 				}
-				
-				$this->configure_convio();
-				
+								
 				// Make API call
 				$response = $this->convio_api->call('SRAdvocacyAPI_takeAction', $this->convio_data);
 				
@@ -244,7 +242,7 @@ if (!class_exists("wp_convio")) {
 			 
 			 } else { 
 	
-				$shortcode = '<div class="wp_convio_post wp_convio_form"><form method="post" action="'. $_SERVER['REQUEST_URI'] .'"><h3>First Name</h3><input type="text" name="wp_convio_first_name" value="'. $this->convio_data['first_name'] .'"><h3>Last Name</h3><input type="text" name="wp_convio_last_name" value="'. $this->convio_data['last_name'] .'"><h3>Street</h3><input type="text" name="wp_convio_street1" value="'. $this->convio_data['street1'] .'"><h3>City</h3><input type="text" name="wp_convio_city" value="'. $this->convio_data['city'] .'"><h3>State</h3><input type="text" name="wp_convio_state" value="'. $this->convio_data['state'] .'"><h3>Zip</h3><input type="text" name="wp_convio_zip" value="'. $this->convio_data['zip'] .'"><h3>Phone</h3><input type="text" name="wp_convio_phone" value="'. $this->convio_data['phone'] .'"><h3>Email</h3><input type="text" name="wp_convio_email" value="'. $this->convio_data['email'] .'"><div class="submit"><input type="submit" name="wp_convio_submit" value="Submit" /></div></form></div>';	
+				$shortcode = '<div class="wp_convio_post wp_convio_form"><form method="post" action="'. $_SERVER['REQUEST_URI'] .'"><h3>'. __('First Name', 'wp_convio') .'</h3><input type="text" name="wp_convio_first_name" value="'. $this->convio_data['first_name'] .'"><h3>'. __('Last Name', 'wp_convio') .'</h3><input type="text" name="wp_convio_last_name" value="'. $this->convio_data['last_name'] .'"><h3>'. __('Street', 'wp_convio') .'</h3><input type="text" name="wp_convio_street1" value="'. $this->convio_data['street1'] .'"><h3>'. __('City', 'wp_convio') .'</h3><input type="text" name="wp_convio_city" value="'. $this->convio_data['city'] .'"><h3>'. __('State', 'wp_convio') .'</h3><input type="text" name="wp_convio_state" value="'. $this->convio_data['state'] .'"><h3>'. __('Zip', 'wp_convio') .'</h3><input type="text" name="wp_convio_zip" value="'. $this->convio_data['zip'] .'"><h3>'. __('Phone', 'wp_convio') .'</h3><input type="text" name="wp_convio_phone" value="'. $this->convio_data['phone'] .'"><h3>'. __('Email', 'wp_convio') .'</h3><input type="text" name="wp_convio_email" value="'. $this->convio_data['email'] .'"><div class="submit"><input type="submit" name="wp_convio_submit" value="'. __('Submit', 'wp_convio') .'" /></div></form></div>';	
 				
 				return $shortcode; 
 			}
@@ -262,7 +260,7 @@ if (!function_exists("wp_convio_ap")) {
 	function wp_convio_ap() {
 		global $wp_convio;
 		if (function_exists('add_options_page')) {
-			add_options_page('WP Convio', 'WP Convio', 9, basename(__FILE__), array(&$wp_convio, 'print_admin_page'));
+			add_options_page('WP Convio', 'WP Convio', 9, basename(__FILE__), array(&$wp_convio, 'admin_page'));
 		}
 	}
 }
