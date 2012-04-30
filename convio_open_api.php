@@ -16,7 +16,7 @@
  * Copyright 2010 Convio, Inc.
  */
 
-class ConvioOpenAPI
+class convio_open_api
 {
 	/**
 	 * @var string The host name of the secure Convio cluster that the site resides on. In most cases this should

@@ -27,7 +27,7 @@
     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-require_once('ConvioOpenAPI.php');
+require_once('convio_open_api.php');
 
 if (!class_exists("wp_convio")) {
 	
@@ -99,7 +99,7 @@ if (!class_exists("wp_convio")) {
 		
 		function configure_convio() {
 		
-			$this->convio_api = new ConvioOpenAPI;
+			$this->convio_api = new convio_open_api;
 		
 			$this->convio_api->host = $this->admin_options['host'];
 			$this->convio_api->short_name = $this->admin_options['short_name'];
