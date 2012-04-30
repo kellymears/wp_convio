@@ -142,23 +142,23 @@ if (!class_exists("wp_convio")) {
 			<div class="wrap">	
 				<form method="post" action="<?php echo $_SERVER["REQUEST_URI"]; ?>">
 					
-					<h2>WordPress - Convio Options</h2>
+					<h2><?php _e('WordPress - Convio Options', 'wp_convio'); ?></h2>
 					
 					<p><strong>This plugin is a work in progress.<br /></strong>Much love,<br /> K.</p>
 					
-					<h3>Convio Host</h3>
+					<h3><?php _e('Convio Host', 'wp_convio'); ?></h3>
 					<input type="text" name="wp_convio_host" value="<?php echo $this->admin_options['host']; ?>">
 					
-					<h3>Convio Short Name</h3>
+					<h3><?php _e('Convio Short Name', 'wp_convio'); ?></h3>
 					<input type="text" name="wp_convio_short_name" value="<?php echo $this->admin_options['short_name']; ?>">
 					
-					<h3>Convio API Key</h3>
+					<h3><?php _e('Convio API Key', 'wp_convio'); ?></h3>
 					<input type="text" name="wp_convio_api_key" value="<?php echo $this->admin_options['api_key']; ?>">
 					
-					<h3>Convio Login Name</h3>
+					<h3><?php _e('Convio Login Name', 'wp_convio'); ?></h3>
 					<input type="text" name="wp_convio_login_name" value="<?php echo $this->admin_options['login_name']; ?>">
 					
-					<h3>Convio Login Password</h3>
+					<h3><?php _e('Convio Login Password', 'wp_convio'); ?></h3>
 					<input type="text" name="wp_convio_login_password" value="<?php echo $this->admin_options['login_password']; ?>">
 
 					<div class="submit">
@@ -218,29 +218,33 @@ if (!class_exists("wp_convio")) {
 				// Poke and Prod Convio Response
 				if(isset($response)) {
 					
+					$messages = '<div class="wp_convio_post wp_convio_messages">';
+					
 					// If respondant has already taken action on this issue:
 					if($response->code = 5806) {
 						
-						$message = '<div class="error"><p><strong>';
-						$message .= _e("You've already taken action on this issue. Thanks!", "wp_convio");
-						$message .= '</strong></p></div>';
+						$messages .= '<div class="error"><p><strong>';
+						$messages .= __("You've already taken action on this issue. Thanks!", "wp_convio");
+						$messages .= '</strong></p></div>';
 					
 					// If respondant has not already taken action on this issue:	
 					} elseif($response->code != 5806) {
 					
-						$message = '<div class="updated"><p><strong>';
-						$message .= _e("Thank You For Gently Prodding Your Representative With A Digital Stick.", "wp_convio");
-						$message .= '</strong></p></div>';
+						$messages .= '<div class="updated"><p><strong>';
+						$messages .= __("Thank You For Gently Prodding Your Representative With A Digital Stick.", "wp_convio");
+						$messages .= '</strong></p></div>';
 						
 					}
 					
-					// Return our message
-					return $message;
+					$messages .= '</div>';
+					
+					// Return our message(s)
+					return $messages;
 				}
 			 
 			 } else { 
 	
-				$shortcode = '<div class="wp_convio_post"><form method="post" action="'. $_SERVER['REQUEST_URI'] .'"><h3>First Name</h3><input type="text" name="wp_convio_first_name" value="'. $this->convio_data['first_name'] .'"><h3>Last Name</h3><input type="text" name="wp_convio_last_name" value="'. $this->convio_data['last_name'] .'"><h3>Street</h3><input type="text" name="wp_convio_street1" value="'. $this->convio_data['street1'] .'"><h3>City</h3><input type="text" name="wp_convio_city" value="'. $this->convio_data['city'] .'"><h3>State</h3><input type="text" name="wp_convio_state" value="'. $this->convio_data['state'] .'"><h3>Zip</h3><input type="text" name="wp_convio_zip" value="'. $this->convio_data['zip'] .'"><h3>Phone</h3><input type="text" name="wp_convio_phone" value="'. $this->convio_data['phone'] .'"><h3>Email</h3><input type="text" name="wp_convio_email" value="'. $this->convio_data['email'] .'"><div class="submit"><input type="submit" name="wp_convio_submit" value="Submit" /></div></form></div>';	
+				$shortcode = '<div class="wp_convio_post wp_convio_form"><form method="post" action="'. $_SERVER['REQUEST_URI'] .'"><h3>First Name</h3><input type="text" name="wp_convio_first_name" value="'. $this->convio_data['first_name'] .'"><h3>Last Name</h3><input type="text" name="wp_convio_last_name" value="'. $this->convio_data['last_name'] .'"><h3>Street</h3><input type="text" name="wp_convio_street1" value="'. $this->convio_data['street1'] .'"><h3>City</h3><input type="text" name="wp_convio_city" value="'. $this->convio_data['city'] .'"><h3>State</h3><input type="text" name="wp_convio_state" value="'. $this->convio_data['state'] .'"><h3>Zip</h3><input type="text" name="wp_convio_zip" value="'. $this->convio_data['zip'] .'"><h3>Phone</h3><input type="text" name="wp_convio_phone" value="'. $this->convio_data['phone'] .'"><h3>Email</h3><input type="text" name="wp_convio_email" value="'. $this->convio_data['email'] .'"><div class="submit"><input type="submit" name="wp_convio_submit" value="Submit" /></div></form></div>';	
 				
 				return $shortcode; 
 			}
@@ -256,9 +260,7 @@ if (class_exists("wp_convio")) {
 // Instantiate the Admin Panel
 if (!function_exists("wp_convio_ap")) {
 	function wp_convio_ap() {
-	
 		global $wp_convio;
-		
 		if (function_exists('add_options_page')) {
 			add_options_page('WP Convio', 'WP Convio', 9, basename(__FILE__), array(&$wp_convio, 'print_admin_page'));
 		}
@@ -275,7 +277,6 @@ if (isset($wp_convio)) {
 	add_action('admin_menu', 'wp_convio_ap');
 	add_action('init',  array(&$wp_convio, 'create_convio_post_types'));
 	// add_action('plugins_loaded', array(&$wp_convio, 'register_widget'));
-	
 	
 	//Filters
 	// add_filter('the_content', array(&$wp_convio, 'get_alert_by_zip'));
