@@ -264,18 +264,21 @@ if (!function_exists("wp_convio_ap")) {
 	}
 }
 
-//Actions and Filters	
+// Actions and Filters	
 if (isset($wp_convio)) {
 
 	// Shortcode
 	add_shortcode('convioaction', array(&$wp_convio, 'convioaction_shortcode'));
 
-	//Actions
+	// Actions
 	add_action('admin_menu', 'wp_convio_ap');
 	add_action('init',  array(&$wp_convio, 'create_convio_post_types'));
-	add_action('wp_print_scripts', '/script.js', array('jquery'));
-	wp_register_style( 'wp_convio_style', plugins_url('style.css', __FILE__) );
-    wp_enqueue_style( 'wp_convio_style' );
+	
+	// Scripting + Styling
+	wp_register_script('wp_convio_script', plugins_url('script.js', __FILE__));
+	wp_register_style('wp_convio_style', plugins_url('style.css', __FILE__));
+	wp_enqueue_script('wp_convio_script');
+	wp_enqueue_style('wp_convio_style');
 
 }
 
