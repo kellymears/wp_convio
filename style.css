@@ -1,4 +1,39 @@
 .wp_convio_post {
-	border: 1px solid black;
-	padding: 10px;
+	padding: 10px 10px 10px 0px;
+	margin-right: 30px;
 }
+
+.wp_convio_post input, .wp_convio_post textarea {
+	padding: 9px;
+	border: solid 1px #E5E5E5;
+	outline: 0;
+	font: normal 13px/100% Verdana, Tahoma, sans-serif;
+	width: 200px;
+	background: #FFFFFF;
+	}
+
+.wp_convio_post textarea {
+	width: 400px;
+	max-width: 400px;
+	height: 150px;
+	line-height: 150%;
+	}
+
+.wp_convio_post input:hover, .wp_convio_post textarea:hover,
+.wp_convio_post input:focus, textarea:focus {
+	border-color: #C9C9C9;
+	}
+
+.wp_convio_post .form label {
+	margin-left: 10px;
+	color: #999999;
+	}
+
+.wp_convio_post .submit input {
+	width: auto;
+	padding: 9px 15px;
+	background: #DE1E1C;
+	border: 0;
+	font-size: 14px;
+	color: #FFFFFF;
+	}

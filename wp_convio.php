@@ -301,7 +301,9 @@ if (!class_exists("wp_convio")) {
 			 
 			 } else { 
 	
-				$shortcode = '<div class="wp_convio_post wp_convio_form"><form method="post" action="'. $_SERVER['REQUEST_URI'] .'">
+				$shortcode = '<div class="wp_convio_post wp_convio_form" style="width:'. $attr['width'] .'px; ';
+				if($attr['float']) { $shortcode .= 'float: '. $attr['float'] .';'; } 
+				$shortcode .= '"><form method="post" action="'. $_SERVER['REQUEST_URI'] .'">
 							<h3>'. __('First Name', 'wp_convio') .'</h3><input type="text" name="wp_convio_first_name" 
 								value="'. $this->convio_data['first_name'] .'">
 							<h3>'. __('Last Name', 'wp_convio') .'</h3><input type="text" name="wp_convio_last_name" 
